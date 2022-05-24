@@ -72,15 +72,11 @@ function ChatHome() {
       {!user ? ( <h1>LOGIN</h1> ) :
       (
         <div className='app_body'>
-        <Router>
-        <Sidebar users={users}/>
-          <Routes>
-            <Route path="/users/:userId" element={<Chat users={users}/>}>
-            </Route>
-            <Route path="/" element={<div>Home Screen</div>}>
-            </Route>
-          </Routes>
-        </Router>
+            <Sidebar users={users}/>
+            <Routes>
+            <Route path="/users/:userId" element={<Chat users={users}/>} />
+            <Route path="/" element={<div>Home Screen</div>} />
+            </Routes>
       </div>
       )}
       

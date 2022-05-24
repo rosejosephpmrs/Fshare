@@ -12,7 +12,7 @@ function App() {
 				<Routes>
 					<Route path="/register" exact element={<Register />} />
 					<Route path="/login" element={<Login />} />
-					<Route path="/" element={<ChatHome />} />
+					<Route path="*" element={<ChatHome />} />
 				</Routes>
 			</Router>
 		</main>
