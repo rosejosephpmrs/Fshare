@@ -32,7 +32,6 @@ function ChatHome() {
   }, [setrefresh, seterror]);
 
   useEffect(() => {
-    console.log("some")
     setloading(false);
     loadUsers().then(() => {
       setrefresh(false);
@@ -57,7 +56,6 @@ function ChatHome() {
   }
 
   if (!loading && users.length === 0) {
-    console.log("gere")
     return (
       <div className='sidebar' >
         <p>

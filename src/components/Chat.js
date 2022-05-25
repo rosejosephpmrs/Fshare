@@ -5,12 +5,14 @@ import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import '../styles/Chat.css'
 import { InsertEmoticon } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
+import { FileUploader } from 'react-drag-drop-files';
 
 
 function Chat({users}) {
     const [input, setInput] = useState("");
     const { userId } = useParams();
     const [user, setUser] = useState("");
+    const [files, setFiles] = useState("");
 
     useEffect(() => {
         if (userId) {
@@ -23,6 +25,12 @@ function Chat({users}) {
         console.log(e.target.value)
         setInput('')
     }
+
+    const handleChange = (f) => {
+        setFiles(f);
+        console.log(files);
+    }
+
     return (
         <div className='chat'>
             <div className='chat_header'>
@@ -31,6 +39,7 @@ function Chat({users}) {
                     <h3>{user.name}</h3>
                 </div>
                 <div className='chat_headerRight'>
+                    <FileUploader handleChange={handleChange} name="file" multiple={true} />
                     <IconButton>
                         <UploadFileOutlinedIcon />
                     </IconButton>
