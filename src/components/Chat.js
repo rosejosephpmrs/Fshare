@@ -23,7 +23,7 @@ function Chat({rooms}) {
 
     const sendMessage = (e) => {
         console.log(input)
-        addMessage(input, files, "", user)
+        addMessage(input, files, "", room)
         e.preventDefault();
         console.log(e.target.value)
         setInput('')
@@ -33,7 +33,7 @@ function Chat({rooms}) {
     const handleChange = (f) => {
         console.log("file")
         setFiles(f);
-        addMessage(input, files, "", user)
+        addMessage(input, files, "", room)
         console.log(files);
 
     }

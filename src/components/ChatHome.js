@@ -4,58 +4,29 @@ import Sidebar from './Sidebar';
 import Chat from './Chat'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import React, { useEffect, useState, useCallback } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+//import CircularProgress from '@mui/material/CircularProgress';
+import { getChatRooms } from '../api/Backend';
 
 function ChatHome() {
-  const [loading, setloading] = useState(false); 
-  const [error, seterror] = useState(false); 
-  const [refresh, setrefresh] = useState(false); 
+  //const [loading, setloading] = useState(false); 
+  //const [error, seterror] = useState(false); 
+  //const [refresh, setrefresh] = useState(false); 
   const [rooms, setrooms] =useState([])
 
   const [user, setUser] = useState('name');
   
-  const loadUsers = useCallback(async () => {
-        setrefresh(true);
-        seterror(null);
-        try {
-            const res = await fetch("https://mocki.io/v1/a619c441-b339-46a0-944e-1b5b99da8bce");
-            if (!res.ok) {
-                throw new Error("Something went wrong...");
-            }
-            const resData = await res.json();
-            console.log(resData)
-            setrooms(resData)
-        } catch(e){
-            seterror(e);
-        }
-        setrefresh(false);
-  }, [setrefresh, seterror]);
+  useEffect(()=>{loadRooms()},[])
 
-  useEffect(() => {
-    setloading(false);
-    loadUsers().then(() => {
-      setrefresh(false);
-      
-    });
-  }, [loadUsers, setloading]);
-
-  if (loading) {
-    return (
-      <div className='sidebar_chatLoad'>
-        <CircularProgress size="large" color="#075E54" />
-        <h1>Loading...</h1>
-      </div>
-    );
+  const loadRooms = () =>{
+    try {
+      const res = getChatRooms()
+      console.log(res)
+    } catch(e) {
+      console.log(e);
+    }
   }
 
-  if (error) {
-    <div className='sidebar_chatLoad'>
-      <p>An Error Occured....Try AGain?</p>
-      <button title="Try Again" onPress={loadUsers} color="#075E54" />
-    </div>;
-  }
-
-  if (!loading && rooms.length === 0) {
+  if (rooms.length === 0) {
     return (
       <div className='sidebar' >
         <p>
