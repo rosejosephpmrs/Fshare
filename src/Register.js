@@ -7,6 +7,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Login from "./Login";
 import axios from "./api/axios";
+import './styles/Register.css'
+import { addUser } from "./api/Backend";
 
 const USER_REGEX = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -16,6 +18,7 @@ const Register = () => {
   const userRef = useRef();
   const errRef = useRef();
 
+  const [email, setUserEmail] = useState("");
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
@@ -39,8 +42,8 @@ const Register = () => {
   }, []);
 
   useEffect(() => {
-    setValidName(USER_REGEX.test(user));
-  }, [user]);
+    setValidName(USER_REGEX.test(email));
+  }, [email]);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
@@ -54,29 +57,27 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
-    const v1 = USER_REGEX.test(user);
+    const v1 = USER_REGEX.test(email);
     const v2 = PWD_REGEX.test(pwd);
     if (!v1 || !v2) {
       setErrMsg("Invalid Entry");
       return;
     }
+    console.log(JSON.stringify({ firstName, lastName, email, user, pwd }))
+  
     try {
-      const response = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ firstName, lastName, user, pwd }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          withCredentials: true,
-        }
-      );
+      const response = await addUser(
+        {"first_name": firstName, 
+          "last_name": lastName, 
+          "email": email,
+          "username": user,
+          "password": pwd
+        })
       // TODO: remove console.logs before deployment
       console.log(JSON.stringify(response?.data));
       setSuccess(true);
       //clear state and controlled inputs
-      setUser("");
+      setUserEmail("");
       setPwd("");
       setMatchPwd("");
     } catch (err) {
@@ -181,6 +182,43 @@ const Register = () => {
               <br />
               Letters, numbers, underscores, hyphens allowed.
             </p>
+            <label htmlFor="lastname">
+              Username:
+              <FontAwesomeIcon
+                icon={faCheck}
+                className={validName ? "valid" : "hide"}
+              />
+              <FontAwesomeIcon
+                icon={faTimes}
+                className={validName || !user ? "hide" : "invalid"}
+              />
+            </label>
+            <input
+              type="text"
+              id="username"
+              ref={userRef}
+              autoComplete="off"
+              onChange={(e) => setUser(e.target.value)}
+              value={user}
+              required
+              aria-invalid={validName ? "false" : "true"}
+              aria-describedby="uidnote"
+              onFocus={() => setUserFocus(true)}
+              onBlur={() => setUserFocus(false)}
+            />
+            <p
+              id="uidnote"
+              className={
+                userFocus && user && !validName ? "instructions" : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              4 to 24 characters.
+              <br />
+              Must begin with a letter.
+              <br />
+              Letters, numbers, underscores, hyphens allowed.
+            </p>
             <label htmlFor="email">
               Email:
               <FontAwesomeIcon
@@ -197,8 +235,8 @@ const Register = () => {
               id="email"
               ref={userRef}
               autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
+              onChange={(e) => setUserEmail(e.target.value)}
+              value={email}
               required
               aria-invalid={validName ? "false" : "true"}
               aria-describedby="uidnote"

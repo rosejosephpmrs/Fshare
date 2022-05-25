@@ -19,17 +19,22 @@ export function newTorrent(files) {
 // torrent: torrent file
 // addTorrent(new Buffer(string, "base64"))
 export function addTorrent(torrent) {
-  const torrent = torrentClient.add(torrent);
-  return torrent;
+  const torrentFile = torrentClient.add(torrent);
+  return torrentFile;
 }
 
-export async function addUser(
+export async function addUser({
   password,
   username,
   first_name,
   last_name,
   email
-) {
+}) {
+  console.log({password,
+    username,
+    first_name,
+    last_name,
+    email})
   return axiosClient.post("/user", {
     password,
     username,
@@ -43,7 +48,7 @@ export async function getMessages() {
   return axiosClient.get("/messages");
 }
 
-export async function sendMessage(text, torrent_file, room_id, creator) {
+export async function addMessage(text, torrent_file, room_id, creator) {
   return axiosClient.post("/messages", {
     text,
     torrent_file,

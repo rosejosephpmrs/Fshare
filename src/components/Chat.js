@@ -6,6 +6,7 @@ import '../styles/Chat.css'
 import { InsertEmoticon } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import { FileUploader } from 'react-drag-drop-files';
+import { addMessage } from '../api/Backend';
 
 
 function Chat({users}) {
@@ -21,14 +22,20 @@ function Chat({users}) {
     },[userId])
 
     const sendMessage = (e) => {
+        console.log(input)
+        addMessage(input, files, "", user)
         e.preventDefault();
         console.log(e.target.value)
         setInput('')
+
     }
 
     const handleChange = (f) => {
+        console.log("file")
         setFiles(f);
+        addMessage(input, files, "", user)
         console.log(files);
+
     }
 
     return (
