@@ -10,7 +10,7 @@ function ChatHome() {
   const [loading, setloading] = useState(false); 
   const [error, seterror] = useState(false); 
   const [refresh, setrefresh] = useState(false); 
-  const [users, setusers] =useState([])
+  const [rooms, setrooms] =useState([])
 
   const [user, setUser] = useState('name');
   
@@ -24,7 +24,7 @@ function ChatHome() {
             }
             const resData = await res.json();
             console.log(resData)
-            setusers(resData)
+            setrooms(resData)
         } catch(e){
             seterror(e);
         }
@@ -55,11 +55,11 @@ function ChatHome() {
     </div>;
   }
 
-  if (!loading && users.length === 0) {
+  if (!loading && rooms.length === 0) {
     return (
       <div className='sidebar' >
         <p>
-          Sorry No Users Available.. 
+          Sorry No Rooms Available.. 
         </p>
       </div>
     );
@@ -70,9 +70,9 @@ function ChatHome() {
       {!user ? ( <h1>LOGIN</h1> ) :
       (
         <div className='app_body'>
-            <Sidebar users={users}/>
+            <Sidebar rooms={rooms}/>
             <Routes>
-            <Route path="/users/:userId" element={<Chat users={users}/>} />
+            <Route path="/rooms/:roomId" element={<Chat rooms={rooms}/>} />
             <Route path="/" element={<div>Home Screen</div>} />
             </Routes>
       </div>

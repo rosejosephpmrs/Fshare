@@ -6,7 +6,7 @@ import {SearchOutlined} from '@mui/icons-material'
 import SidebarChat from './SidebarChat';
 
 
-function Sidebar({users}) {
+function Sidebar({rooms}) {
     return (
         <div className='sidebar'>
           
@@ -28,14 +28,15 @@ function Sidebar({users}) {
               </div>    
           </div>
           <div className='sidebar_chats'>
-                {users.map((user) => (
+                <SidebarChat addNewChat={true} />
+                {rooms.map((room) => (
                     <SidebarChat 
-                        key={user.id}
-                        name={user.name}
-                        id={user.id}
-                        image={user.picture}
-                        lastChat={user.lastChat}
-                        timestamp={user.latest_timestamp}
+                        key={room.id}
+                        name={room.name}
+                        id={room.id}
+                        image={room.picture}
+                        lastChat={room.lastChat}
+                        timestamp={room.latest_timestamp}
                     />
                 ))}
           </div>

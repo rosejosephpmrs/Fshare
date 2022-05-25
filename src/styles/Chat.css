@@ -45,6 +45,7 @@
     position: absolute;
     top: -15px;
     font-size: xx-small;
+    color: black;
 }
 .chat_timestamp {
     margin-left: 10px;

@@ -8,17 +8,17 @@ import { useParams } from 'react-router-dom';
 import { FileUploader } from 'react-drag-drop-files';
 
 
-function Chat({users}) {
+function Chat({rooms}) {
     const [input, setInput] = useState("");
-    const { userId } = useParams();
-    const [user, setUser] = useState("");
+    const { roomId } = useParams();
+    const [room, setRoom] = useState("");
     const [files, setFiles] = useState("");
 
     useEffect(() => {
-        if (userId) {
-            setUser(users.filter(user => user.id == userId)[0])
+        if (roomId) {
+            setRoom(rooms.filter(room => room.id == roomId)[0])
         }
-    },[userId])
+    },[roomId])
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -34,9 +34,9 @@ function Chat({users}) {
     return (
         <div className='chat'>
             <div className='chat_header'>
-                <Avatar src={user.picture}/>
+                <Avatar src={room.picture}/>
                 <div className='chat_headerInfo'>
-                    <h3>{user.name}</h3>
+                    <h3>{room.name}</h3>
                 </div>
                 <div className='chat_headerRight'>
                     <FileUploader handleChange={handleChange} name="file" multiple={true} />
