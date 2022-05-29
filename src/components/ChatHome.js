@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import React, { useEffect, useState, useCallback } from 'react';
 //import CircularProgress from '@mui/material/CircularProgress';
 import { getChatRooms } from '../api/Backend';
+import axios from 'axios';
 
 function ChatHome() {
   //const [loading, setloading] = useState(false); 
@@ -15,16 +16,32 @@ function ChatHome() {
 
   const [user, setUser] = useState('name');
   
-  useEffect(()=>{loadRooms()},[])
+  // useEffect(()=>{loadRooms()},[])
 
-  const loadRooms = () =>{
-    try {
-      const res = getChatRooms()
-      console.log(res)
-    } catch(e) {
-      console.log(e);
-    }
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: response } = await axios.get('http://159.65.146.44:8000/api/chat/');
+        setrooms(response)
+        console.log("Response", response)
+      } catch (error) {
+        console.error(error)
+      }
+      // setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  // const loadRooms = () =>{
+  //   try {
+  //     console.log("yo")
+  //     const res = getChatRooms()
+  //     console.log('response', res.response)
+  //   } catch(e) {
+  //     console.log(e);
+  //   }
+  // }
 
   if (rooms.length === 0) {
     return (
@@ -43,8 +60,8 @@ function ChatHome() {
         <div className='app_body'>
             <Sidebar rooms={rooms}/>
             <Routes>
-            <Route path="/rooms/:roomId" element={<Chat rooms={rooms}/>} />
-            <Route path="/" element={<div>Home Screen</div>} />
+            <Route path="/chat/:roomId" element={<Chat rooms={rooms}/>} />
+            <Route path="/" element={<h1> No chat selected </h1>} />
             </Routes>
       </div>
       )}

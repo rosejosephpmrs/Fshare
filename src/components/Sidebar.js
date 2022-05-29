@@ -31,9 +31,9 @@ function Sidebar({rooms}) {
                 <SidebarChat addNewChat={true} />
                 {rooms.map((room) => (
                     <SidebarChat 
-                        key={room.id}
+                        key={room.room_id}
                         name={room.name}
-                        id={room.id}
+                        id={room.room_id}
                         image={room.picture}
                         lastChat={room.lastChat}
                         timestamp={room.latest_timestamp}

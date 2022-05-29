@@ -24,6 +24,7 @@ const Login = () => {
 	}, [user, pwd]);
 
 	const handleSubmit = async (e) => {
+		localStorage.setItem('user', 1)
 		e.preventDefault();
 
 		try {
@@ -94,7 +95,7 @@ const Login = () => {
 							value={pwd}
 							required
 						/>
-						<button>Sign In</button>
+						<button type="submit">Sign In</button>
 					</form>
 					<p>
 						Need an Account?

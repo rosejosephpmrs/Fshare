@@ -74,7 +74,8 @@ const Register = () => {
           "password": pwd
         })
       // TODO: remove console.logs before deployment
-      console.log(JSON.stringify(response?.data));
+      console.log(response.data.id);
+      localStorage.setItem('user', response.data.id)
       setSuccess(true);
       //clear state and controlled inputs
       setUserEmail("");
