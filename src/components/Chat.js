@@ -48,12 +48,13 @@ function Chat({rooms}) {
             try {
                 const { data: response } = await axios.get(messageUrl);
                 // setrooms(response)
-                console.log("Messages", response)
+                // console.log("Messages", response)
                 let filtered_messages = response.filter(filterbyRoomId)
                 setMessage(filtered_messages)
-                let sentMessageList = response.filter(filterSent)
+                // console.log("filtered", messages)
+                let sentMessageList = messages.filter(filterSent)
                 setSentMessages(sentMessageList)
-                let receivedMessageList = response.filter(filterReceived)
+                let receivedMessageList = messages.filter(filterReceived)
                 setReceivedMessages(receivedMessageList)
             } catch (error) {
                 console.error(error)
@@ -73,7 +74,7 @@ function Chat({rooms}) {
         }
         
         
-    },[roomId])
+    },[messages])
 
     const sendMessage = (e) => {
         // console.log(files)
@@ -108,7 +109,7 @@ function Chat({rooms}) {
             <div className='chat_header'>
                 <Avatar src={room.picture}/>
                 <div className='chat_headerInfo'>
-                    <h3>{room.name}</h3>
+                    <h3>{room.room_id}</h3>
                 </div>
                 <div className='chat_headerRight'>
                     {/* <FileUploader handleChange={handleChange} name="file" multiple={true} /> */}

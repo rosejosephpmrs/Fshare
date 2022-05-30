@@ -66,7 +66,7 @@ const Login = () => {
 					<p>{/* <a href="#">Go to Home</a> */}</p>
 				</section>
 			) : (
-				<section>
+				<section className="section-register">
 					<p
 						ref={errRef}
 						className={errMsg ? 'errmsg' : 'offscreen'}
@@ -74,8 +74,8 @@ const Login = () => {
 					>
 						{errMsg}
 					</p>
-					<h1>Sign In</h1>
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} className="form-register">
+						<h1>Sign In</h1>
 						<label htmlFor="username">Username:</label>
 						<input
 							type="text"
@@ -96,14 +96,15 @@ const Login = () => {
 							required
 						/>
 						<button type="submit">Sign In</button>
-					</form>
-					<p>
+						<p>
 						Need an Account?
 						<br />
 						<span className="line">
 							<a href="/register">Sign Up</a>
 						</span>
 					</p>
+					</form>
+					
 				</section>
 			)}
 		</>

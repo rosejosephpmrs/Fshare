@@ -32,7 +32,7 @@ function Sidebar({rooms}) {
                 {rooms.map((room) => (
                     <SidebarChat 
                         key={room.room_id}
-                        name={room.name}
+                        name={room.room_id}
                         id={room.room_id}
                         image={room.picture}
                         lastChat={room.lastChat}

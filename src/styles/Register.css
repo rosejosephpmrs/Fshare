@@ -1,0 +1,147 @@
+     /* @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	color: #fff;
+}
+
+body {
+	min-height: 100vh;
+	background-color: rgb(255, 184, 30);
+}
+
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem 0.5rem;
+} */
+     
+     .section-register {
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-start;
+         align-items: center;
+         min-height: 100vh;
+         padding: 0rem 0.5rem;
+         padding: 0rem;
+         background-color: #F0FFFF;
+         /* border: 1px solid black; */
+     }
+     
+     .form-register {
+         display: flex;
+         flex-direction: column;
+         justify-content: space-evenly;
+         flex-grow: 0;
+         padding-bottom: 1rem;
+         background-color: #AFEEEE;
+         padding: 2rem 5rem;
+         margin-top: 5rem;
+     }
+     
+     .form-register input[type='text'],
+     .form-register input[type='password'],
+     .form-register button,
+     .form-register textarea {
+         font-family: 'Nunito', sans-serif;
+         font-size: 22px;
+         padding: 0.25rem;
+         border-radius: 0;
+         border: none;
+         margin-top: 0.25rem;
+     }
+     
+     .form-register label,
+     .form-register button {
+         margin-top: 1rem;
+     }
+     
+     .form-register button {
+         padding: 0.5rem;
+         cursor: pointer;
+         margin-top: 2rem;
+     }
+     
+     .form-register a,
+     .form-register a:visited {
+         /* color: #fff; */
+     }
+     
+     .form-register h1 {
+         margin-left: 0;
+     }
+     
+     */
+     /* input[type='text'],
+ input[type='password'],
+ button,
+ textarea {
+     font-family: 'Nunito', sans-serif;
+     font-size: 22px;
+     padding: 0.25rem;
+     border-radius: 0.5rem;
+ } */
+     /* label,
+ button {
+     margin-top: 1rem;
+ }
+ 
+ button {
+     padding: 0.5rem;
+ } */
+     
+     .instructions {
+         font-size: 0.75rem;
+         border-radius: 0.5rem;
+         background: #000;
+         color: #fff;
+         padding: 0.25rem;
+         position: relative;
+         bottom: -10px;
+     }
+     
+     .instructions>svg {
+         margin-right: 0.25rem;
+     }
+     
+     .offscreen {
+         position: absolute;
+         left: -9999px;
+     }
+     
+     .hide {
+         display: none;
+     }
+     
+     .valid {
+         color: limegreen;
+         margin-left: 0.25rem;
+     }
+     
+     .invalid {
+         color: red;
+         margin-left: 0.25rem;
+     }
+     
+     .errmsg {
+         background-color: lightpink;
+         color: firebrick;
+         font-weight: bold;
+         padding: 0.5rem;
+         margin-bottom: 0.5rem;
+     }
+     
+     .line {
+         display: inline-block;
+     }

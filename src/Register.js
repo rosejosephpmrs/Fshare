@@ -52,7 +52,7 @@ const Register = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd, matchPwd]);
+  }, [ pwd, matchPwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,7 +98,7 @@ const Register = () => {
       {success ? (
         <Login />
       ) : (
-        <section>
+        <section className="section-register">
           <p
             ref={errRef}
             className={errMsg ? "errmsg" : "offscreen"}
@@ -106,9 +106,10 @@ const Register = () => {
           >
             {errMsg}
           </p>
-          <h1>Register</h1>
+          
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="form-register">
+          <h1>Register</h1>
             <label htmlFor="firstname">
               First Name:
               <FontAwesomeIcon
@@ -139,12 +140,6 @@ const Register = () => {
                 userFocus && user && !validName ? "instructions" : "offscreen"
               }
             >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              4 to 24 characters.
-              <br />
-              Must begin with a letter.
-              <br />
-              Letters, numbers, underscores, hyphens allowed.
             </p>
             <label htmlFor="lastname">
               Last Name:
@@ -176,12 +171,6 @@ const Register = () => {
                 userFocus && user && !validName ? "instructions" : "offscreen"
               }
             >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              4 to 24 characters.
-              <br />
-              Must begin with a letter.
-              <br />
-              Letters, numbers, underscores, hyphens allowed.
             </p>
             <label htmlFor="lastname">
               Username:
@@ -213,12 +202,6 @@ const Register = () => {
                 userFocus && user && !validName ? "instructions" : "offscreen"
               }
             >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              4 to 24 characters.
-              <br />
-              Must begin with a letter.
-              <br />
-              Letters, numbers, underscores, hyphens allowed.
             </p>
             <label htmlFor="email">
               Email:
@@ -250,12 +233,6 @@ const Register = () => {
                 userFocus && user && !validName ? "instructions" : "offscreen"
               }
             >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              4 to 24 characters.
-              <br />
-              Must begin with a letter.
-              <br />
-              Letters, numbers, underscores, hyphens allowed.
             </p>
 
             <label htmlFor="password">
@@ -335,14 +312,15 @@ const Register = () => {
             >
               Sign Up
             </button>
-          </form>
-          <p>
+            <p>
             Already registered?
             <br />
             <span className="line">
               <a href="/login">Sign In</a>
             </span>
           </p>
+          </form>
+          
         </section>
       )}
     </>

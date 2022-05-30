@@ -7,6 +7,8 @@ import React, { useEffect, useState, useCallback } from 'react';
 //import CircularProgress from '@mui/material/CircularProgress';
 import { getChatRooms } from '../api/Backend';
 import axios from 'axios';
+import NewChatForm from './NewChatForm';
+import '../styles/Chat.css'
 
 function ChatHome() {
   //const [loading, setloading] = useState(false); 
@@ -15,6 +17,8 @@ function ChatHome() {
   const [rooms, setrooms] =useState([])
 
   const [user, setUser] = useState('name');
+
+  const [users, setUsers] = useState([])
   
   // useEffect(()=>{loadRooms()},[])
 
@@ -29,8 +33,19 @@ function ChatHome() {
       }
       // setLoading(false);
     };
+    const fetchUsers = async () => {
+      try {
+        const { data: response } = await axios.get('http://159.65.146.44:8000/api/user/');
+        setUsers(response)
+        console.log("Response", response)
+      } catch (error) {
+        console.error(error)
+      }
+      // setLoading(false);
+    };
 
     fetchData();
+    fetchUsers();
   }, []);
 
   // const loadRooms = () =>{
@@ -61,7 +76,8 @@ function ChatHome() {
             <Sidebar rooms={rooms}/>
             <Routes>
             <Route path="/chat/:roomId" element={<Chat rooms={rooms}/>} />
-            <Route path="/" element={<h1> No chat selected </h1>} />
+            <Route path="/" element={<p className="para-chat"> No chat selected </p>} />
+            <Route path="/chat/add" element={<NewChatForm userprops={users}/>} />
             </Routes>
       </div>
       )}

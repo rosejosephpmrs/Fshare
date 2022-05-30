@@ -21,9 +21,13 @@ function SidebarChat({addNewChat, name, id, image, lastChat, timestamp}) {
         </div>
      </Link>
     ) : (
-        <div className='sidebarChat' onClick={createChat}>
-            <h2> Add new chat</h2>
+        <Link to={`/chat/add/`} className="link">
+        <div className='sidebarChat'>
+            <div className='sidebarChat_info'>
+                <h2>Add new chat room</h2>
+            </div>
         </div>
+     </Link>
     )
 }
 

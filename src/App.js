@@ -2,6 +2,7 @@ import Register from './Register';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import ChatHome from './components/ChatHome';
+import NewChatForm from './components/NewChatForm';
 
 
 
