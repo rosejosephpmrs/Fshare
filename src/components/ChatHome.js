@@ -25,7 +25,7 @@ function ChatHome() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: response } = await axios.get('http://159.65.146.44:8000/api/chat/');
+        const { data: response } = await axios.get('/api/chat/');
         setrooms(response)
         console.log("Response", response)
       } catch (error) {
