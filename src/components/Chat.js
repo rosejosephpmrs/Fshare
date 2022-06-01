@@ -20,7 +20,7 @@ function Chat({rooms}) {
     const [sentMessages, setSentMessages] = useState([])
     const [receivedMessages, setReceivedMessages] = useState([])
 
-    const messageUrl = 'http://159.65.146.44:8000/api/messages/'
+    const messageUrl = '/api/messages/'
 
     const filterbyRoomId = (obj) => {
         if (obj.room_id == roomId){
