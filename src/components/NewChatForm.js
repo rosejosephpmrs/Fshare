@@ -16,7 +16,7 @@ function NewChatForm(userprops){
 
   const fetchUsers = async() => {
     try {
-      const {data: response} = await axios.get('http://159.65.146.44:8000/api/user/')
+      const {data: response} = await axios.get('/api/user/')
       // console.log(response)
       setUsers(response)
       // console.log(users)
@@ -41,7 +41,7 @@ function NewChatForm(userprops){
     const newlist = participants.split(',')
     newlist.forEach(item => newParticipants.push(parseInt(item)))
     try {
-      const response = await axios.post('http://159.65.146.44:8000/api/chat/', {
+      const response = await axios.post('/api/chat/', {
         room_name: roomName,
         participants: newParticipants
       })
