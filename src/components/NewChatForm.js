@@ -42,7 +42,7 @@ function NewChatForm(userprops){
     newlist.forEach(item => newParticipants.push(parseInt(item)))
     try {
       const response = await axios.post('http://159.65.146.44:8000/api/chat/', {
-        room_name: roomName,
+        name: roomName,
         participants: newParticipants
       })
       console.log(response)

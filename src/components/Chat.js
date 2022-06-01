@@ -109,7 +109,7 @@ function Chat({rooms}) {
             <div className='chat_header'>
                 <Avatar src={room.picture}/>
                 <div className='chat_headerInfo'>
-                    <h3>{room.room_id}</h3>
+                    <h3>{room.name}</h3>
                 </div>
                 <div className='chat_headerRight'>
                     {/* <FileUploader handleChange={handleChange} name="file" multiple={true} /> */}
