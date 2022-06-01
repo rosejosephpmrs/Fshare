@@ -4,13 +4,14 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import '../styles/Chat.css'
 import { InsertEmoticon } from '@mui/icons-material';
+import { SendRounded } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import { FileUploader } from 'react-drag-drop-files';
 import { addMessage } from '../api/Backend';
 import axios from 'axios';
 
 
-function Chat({rooms}) {
+function Chat({rooms, users}) {
     const [input, setInput] = useState("");
     const { roomId } = useParams();
     const [room, setRoom] = useState("");
@@ -42,6 +43,12 @@ function Chat({rooms}) {
             return true
         }
         return false
+    }
+
+    const getUserName = (id) => {
+        let creator = users.filter((user)=> user.id === id)
+        console.log(creator[0].username)
+        return creator[0].username
     }
 
     const fetchData = async () => {
@@ -125,29 +132,34 @@ function Chat({rooms}) {
                     </IconButton>
                 </div>
             </div>
-            {receivedMessages.map((message) =>
-            <div className='chat_body' key={message.message_id}>
-                <div className={`chat_message ${true && 'chat_receiver'}`}> 
-                    <span className='chat_name'></span>
-                    {message.text}
-                    <span className= 'chat_timestamp'>from {message.creator}</span>
+            <div className="chat_main">
+                {receivedMessages.map((message) =>
+                <div className='chat_body' key={message.message_id}>
+                    <div className={`chat_message ${true && 'chat_receiver'}`}> 
+                        <span className='chat_name'>{getUserName(message.creator)}</span>
+                        {message.text} {message.magnet_uri? "(File Attached)" : ""}
+                        <span className= 'chat_timestamp'>{message.timestamp}</span>
+                    </div>
                 </div>
-            </div>
-            )}
-            {sentMessages.map((message)=>
-            <div className='chat_body' key={message.message_id}>
-                <div className={`chat_message ${true && 'chat_sender'}`}> 
-                    <span className='chat_name'></span>
-                    {message.text}
-                    <span className= 'chat_timestamp'>3.52pm</span>
+                )}
+                {sentMessages.map((message)=>
+                <div className='chat_body' key={message.message_id}>
+                    <div className={`chat_message ${true && 'chat_sender'}`}> 
+                        <span className='chat_name'>{getUserName(message.creator)}</span>
+                        {message.text} {message.magnet_uri? "(File Attached)" : ""}
+                        <span className= 'chat_timestamp'>{message.timestamp}</span>
+                    </div>
                 </div>
+                )}
             </div>
-            )}
             <div className='chat_footer'>
                 <InsertEmoticon />
                 <form encType="multipart/form-data">
                     <input type="text" placeholder="Type a message" value={input} onChange={e => setInput(e.target.value) } />
-                    <button type="submit" onClick={sendMessage}>Send</button>
+                    {/* <IconButton> */}
+                        {/* <SendRounded  onClick={sendMessage}/> */}
+                        <button type="submit" onClick={sendMessage} className="submit-btn">Send</button>
+                    {/* </IconButton> */}
                 </form>
             </div>
 

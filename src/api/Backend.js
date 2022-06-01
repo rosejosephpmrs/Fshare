@@ -2,7 +2,7 @@ const axios = require("axios").default;
 const WebTorrent = require("webtorrent/webtorrent.min.js");
 
 const axiosClient = axios.create({
-    baseURL: "/api/",
+    baseURL: "http://159.65.146.44:8000/api",
 });
 
 const torrentClient = new WebTorrent();
@@ -38,11 +38,11 @@ export async function addUser({
         email
     })
     return axiosClient.post("/user/", {
-        password,
-        username,
-        first_name,
-        last_name,
-        email,
+        'password': password,
+        'username': username,
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
     });
 }
 

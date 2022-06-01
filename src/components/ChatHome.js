@@ -75,7 +75,7 @@ function ChatHome() {
         <div className='app_body'>
             <Sidebar rooms={rooms}/>
             <Routes>
-            <Route path="/chat/:roomId" element={<Chat rooms={rooms}/>} />
+            <Route path="/chat/:roomId" element={<Chat rooms={rooms} users={users}/>} />
             <Route path="/" element={<p className="para-chat"> No chat selected </p>} />
             <Route path="/chat/add" element={<NewChatForm userprops={users}/>} />
             </Routes>

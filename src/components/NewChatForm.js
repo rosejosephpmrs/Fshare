@@ -11,6 +11,7 @@ function NewChatForm(userprops){
   const [usersList, setUsersList] = useState([]);
   const [participants, setParticipants] = useState([]);
   const [roomName, setRoomName] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
 
   console.log("passed", userprops)
 
@@ -38,6 +39,7 @@ function NewChatForm(userprops){
   const handleSubmit = async (e) => {
     e.preventDefault();
     let newParticipants = []
+    setSuccessMessage("")
     const newlist = participants.split(',')
     newlist.forEach(item => newParticipants.push(parseInt(item)))
     try {
@@ -46,6 +48,7 @@ function NewChatForm(userprops){
         participants: newParticipants
       })
       console.log(response)
+      setSuccessMessage("Chat room added!")
     } catch(err) {
       console.log(err)
     }
@@ -71,6 +74,7 @@ function NewChatForm(userprops){
             className=".input-line"
           />
         <input type="submit" value="Create Room" className="submit-btn"/>
+        <p>{successMessage}</p>
     </form>
   )
 }

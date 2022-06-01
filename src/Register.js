@@ -37,6 +37,8 @@ const Register = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
+  const [successMessage, setSuccessMessage] = useState("")
+
   useEffect(() => {
     userRef.current.focus();
   }, []);
@@ -74,6 +76,7 @@ const Register = () => {
           "password": pwd
         })
       // TODO: remove console.logs before deployment
+      setSuccessMessage("User added!")
       console.log(response.data.id);
       localStorage.setItem('user', response.data.id)
       setSuccess(true);
@@ -312,6 +315,7 @@ const Register = () => {
             >
               Sign Up
             </button>
+            <p> {successMessage} </p>
             <p>
             Already registered?
             <br />
