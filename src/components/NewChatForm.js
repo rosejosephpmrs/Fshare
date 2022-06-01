@@ -16,7 +16,7 @@ function NewChatForm(userprops){
 
   const fetchUsers = async() => {
     try {
-      const {data: response} = await axios.get('/api/user/')
+      const {data: response} = await axios.get('http://159.65.146.44:8000/api/user/')
       // console.log(response)
       setUsers(response)
       // console.log(users)
