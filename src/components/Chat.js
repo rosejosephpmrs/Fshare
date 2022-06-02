@@ -191,7 +191,7 @@ function Chat({rooms, users}) {
                     <input type="text" placeholder="Type a message" value={input} onChange={e => setInput(e.target.value) } />
                     {/* <IconButton> */}
                         {/* <SendRounded  onClick={sendMessage}/> */}
-                        <button type="submit" onClick={sendMessage} className="submit-btn">Send</button>
+                        <button type="submit" onClick={sendMessage} >Send</button>
                     {/* </IconButton> */}
                 </form>
             </div>

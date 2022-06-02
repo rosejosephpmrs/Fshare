@@ -101,8 +101,10 @@
 .chat_footer>form>button {
     /* display: none; */
     border-radius: 50%;
-    /* margin-left: 0; */
+    margin: 5px; 
     cursor: pointer;
+    border: none;
+    padding-right: 8px;
 }
 
 .chat_footer>.MuiSvgIcon-root {
