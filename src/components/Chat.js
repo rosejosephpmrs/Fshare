@@ -111,11 +111,11 @@ function Chat({rooms, users}) {
         }
         
         
-    },[roomId])
+    },[messages])
 
     const sendMessage = (e) => {
         // console.log(files)
-        console.log(input)
+        console.log("filestest", files)
         const res = addMessage(input, files, roomId, user)
         console.log("Response", res)
         e.preventDefault();
@@ -138,8 +138,6 @@ function Chat({rooms, users}) {
         console.log("file", e.target.files[0])
         // addMessage(input, files, roomId, 2)
         console.log(files);
-        newTorrent(e.target.files[0])
-
     }
 
     return (
