@@ -31,7 +31,7 @@ function Chat({rooms, users}) {
     }
 
     const filterSent = (obj) => {
-        console.log(localStorage.getItem('user'))
+        console.log("userid", localStorage.getItem('user'))
         if(obj.creator == localStorage.getItem('user')){
             return true
         }
