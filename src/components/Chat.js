@@ -70,6 +70,7 @@ function Chat({rooms, users}) {
         }
         console.log("mess", messagesToBeSeeded)
         for(let i=0; i<messagesToBeSeeded.length; i++){
+            console.log("Download", messagesToBeSeeded[i].magnet_uri)
             addTorrent(messagesToBeSeeded[i].magnet_uri)
         }
     }
@@ -111,7 +112,7 @@ function Chat({rooms, users}) {
         }
         
         
-    },[roomId])
+    },[messages])
 
     const sendMessage = (e) => {
         // console.log(files)
