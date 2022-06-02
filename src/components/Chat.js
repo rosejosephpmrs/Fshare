@@ -165,16 +165,16 @@ function Chat({rooms, users}) {
                 </div>
             </div>
             <div className="chat_main">
-                {receivedMessages.map((message) =>
+                {messages.map((message) =>
                 <div className='chat_body' key={message.message_id}>
-                    <div className={`chat_message ${true && 'chat_receiver'}`}> 
+                    <div className={`chat_message ${message.creator == localStorage.getItem('user') && 'chat_receiver'}`}> 
                         <span className='chat_name'>{getUserName(message.creator)}</span>
                         {message.text} {message.magnet_uri? "(File Attached)" : ""}
                         <span className= 'chat_timestamp'>{message.timestamp}</span>
                     </div>
                 </div>
                 )}
-                {sentMessages.map((message)=>
+                {/*{sentMessages.map((message)=>
                 <div className='chat_body' key={message.message_id}>
                     <div className={`chat_message ${true && 'chat_sender'}`}> 
                         <span className='chat_name'>{getUserName(message.creator)}</span>
@@ -182,7 +182,7 @@ function Chat({rooms, users}) {
                         <span className= 'chat_timestamp'>{message.timestamp}</span>
                     </div>
                 </div>
-                )}
+                )}*/}
             </div>
             <div className='chat_footer'>
                 <InsertEmoticon />
