@@ -11,6 +11,7 @@ const torrentClient = new WebTorrent();
 // can use drag-drop package
 export function newTorrent(files) {
     const torrent = torrentClient.seed(files);
+    torrent.on("upload", () => { console.log(torrent.uploadSpeed) })
     return torrent;
 
     // torrent.torrentFile.toString("base64");
@@ -21,6 +22,10 @@ export function newTorrent(files) {
 export function addTorrent(torrent) {
     const torrentFile = torrentClient.add(torrent);
     return torrentFile;
+}
+
+export function getActiveTorrents() {
+    return torrentClient.torrents.map((torrent) => torrent.magnetURI);
 }
 
 export async function addUser({

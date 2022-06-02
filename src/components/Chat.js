@@ -7,8 +7,9 @@ import { InsertEmoticon } from '@mui/icons-material';
 import { SendRounded } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import { FileUploader } from 'react-drag-drop-files';
-import { addMessage } from '../api/Backend';
+import { addMessage, addTorrent, getActiveTorrents, newTorrent } from '../api/Backend';
 import axios from 'axios';
+
 
 
 function Chat({rooms, users}) {
@@ -20,6 +21,7 @@ function Chat({rooms, users}) {
     const [messages, setMessage] = useState([])
     const [sentMessages, setSentMessages] = useState([])
     const [receivedMessages, setReceivedMessages] = useState([])
+    const [latestMessage, setLatestMessage] = useState({})
 
     const messageUrl = 'http://159.65.146.44:8000/api/messages/'
 
@@ -46,9 +48,30 @@ function Chat({rooms, users}) {
     }
 
     const getUserName = (id) => {
+        // console.log("id", id)
         let creator = users.filter((user)=> user.id === id)
         console.log(creator[0].username)
         return creator[0].username
+    }
+
+    const checkSeeded = () => {
+        const activeTorrents = getActiveTorrents()
+        console.log("active", activeTorrents)
+        let messagesToBeSeeded = []
+        console.log("simple", messages)
+        let messageAttach = messages.filter(message => message.magnet_uri != null)
+        console.log("attach", messageAttach)
+        // activeTorrents.forEach(item => {
+        //     messagesToBeSeeded.push(messages.filter(message => message.magnet_uri == item))
+        // });
+        for(let i=0; i<messageAttach.length; i++){
+            if(!activeTorrents.includes(messageAttach[i].magnet_uri))
+                messagesToBeSeeded.push(messageAttach[i])
+        }
+        console.log("mess", messagesToBeSeeded)
+        for(let i=0; i<messagesToBeSeeded.length; i++){
+            addTorrent(messagesToBeSeeded[i].magnet_uri)
+        }
     }
 
     const fetchData = async () => {
@@ -63,6 +86,13 @@ function Chat({rooms, users}) {
                 setSentMessages(sentMessageList)
                 let receivedMessageList = messages.filter(filterReceived)
                 setReceivedMessages(receivedMessageList)
+                setLatestMessage(sentMessages[sentMessages.length - 1])
+                console.log("last", latestMessage)
+                // if(latestMessage.magnet_uri){
+                //     addTorrent(latestMessage.magnet_uri)
+                // }
+                console.log(messages)
+                checkSeeded();
             } catch (error) {
                 console.error(error)
             }
@@ -81,12 +111,12 @@ function Chat({rooms, users}) {
         }
         
         
-    },[messages])
+    },[roomId])
 
     const sendMessage = (e) => {
         // console.log(files)
         console.log(input)
-        const res = addMessage(input, files, roomId, 1)
+        const res = addMessage(input, files, roomId, user)
         console.log("Response", res)
         e.preventDefault();
         // console.log(e.target.value)
@@ -108,6 +138,7 @@ function Chat({rooms, users}) {
         console.log("file", e.target.files[0])
         // addMessage(input, files, roomId, 2)
         console.log(files);
+        newTorrent(e.target.files[0])
 
     }
 
