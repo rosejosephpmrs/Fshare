@@ -89,7 +89,7 @@
 .chat_footer>form>input {
     flex: 1;
     border-radius: 12px;
-    padding: 7px;
+    padding: 9px;
     border: none;
     margin: 7px 0px;
 }
