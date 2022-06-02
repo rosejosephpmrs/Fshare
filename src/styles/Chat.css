@@ -33,7 +33,7 @@
 }
 
 .chat_body {
-    flex: 0;
+    flex: 1;
     background-color: white;
     padding: 30px;
     overflow-x: scroll;
@@ -50,7 +50,7 @@
     background-color: #F0FFFF;
     border-radius: 10px;
     width: fit-content;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     /* overflow-x: scroll; */
     max-width: 60%;
 }
