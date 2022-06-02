@@ -23,10 +23,24 @@ export function newTorrent(files) {
 
 // torrent: torrent file
 // addTorrent(new Buffer(string, "base64"))
-export function addTorrent(torrent) {
-    const torrentFile = torrentClient.add(torrent);
-    torrent.on("download", () => { console.log(`Download speed ${torrent.downloadSpeed}`) })
-    return torrentFile;
+export function addTorrent(magnet_uri) {
+    const torrent = torrentClient.add(magnet_uri);
+    torrent.on("download", () => { console.log(`Download speed ${torrent.downloadSpeed} ${torrent.progress}`) })
+    torrent.on("done", () => {
+        torrent.files.forEach((file) => {
+            file.getBlobURL((_err, url) => {
+                let a = document.createElement("a")
+                a.href = url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function() {
+                    document.body.removeChild(a);
+                }, 0);
+            })
+        })
+    })
+    return torrent;
 }
 
 export function getActiveTorrents() {
