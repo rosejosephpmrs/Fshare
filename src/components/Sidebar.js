@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/Sidebar.css';
 import {Avatar, IconButton} from '@mui/material'
 import MoreVertRounded from '@mui/icons-material/MoreVertRounded'
 import {SearchOutlined} from '@mui/icons-material'
 import SidebarChat from './SidebarChat';
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 function Sidebar({rooms}) {
+    const [searchTerm, setSearchTerm] = useState('')
+
+    const filterBySearch = (room) => {
+      if (searchTerm == '')
+        return room
+      else if(room.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        return room
+    }
+
     return (
         <div className='sidebar'>
           
@@ -24,12 +34,13 @@ function Sidebar({rooms}) {
           <div className='sidebar_search'>
               <div className='sidebar_searchContainer'>
                 <SearchOutlined />
-                <input placeholder='Search' type="text" />
+                <input placeholder='Search' type="text" value={searchTerm} onChange={e => {setSearchTerm(e.target.value)}}/>
+                <IconButton className='sidebar_searchClear' onClick={()=>setSearchTerm('')}><ClearIcon /></IconButton>
               </div>    
           </div>
           <div className='sidebar_chats'>
                 <SidebarChat addNewChat={true} />
-                {rooms.map((room) => (
+                {rooms.filter(filterBySearch).map((room) => (
                     <SidebarChat 
                         key={room.room_id}
                         name={room.name}

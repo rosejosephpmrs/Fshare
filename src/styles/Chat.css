@@ -33,7 +33,7 @@
 }
 
 .chat_body {
-    flex: 0;
+    flex: 1;
     background-color: white;
     padding: 30px;
     overflow-x: scroll;
@@ -89,7 +89,7 @@
 .chat_footer>form>input {
     flex: 1;
     border-radius: 12px;
-    padding: 7px;
+    padding: 9px;
     border: none;
     margin: 7px 0px;
 }
@@ -101,8 +101,10 @@
 .chat_footer>form>button {
     /* display: none; */
     border-radius: 50%;
-    /* margin-left: 0; */
+    margin: 5px; 
     cursor: pointer;
+    border: none;
+    padding-right: 8px;
 }
 
 .chat_footer>.MuiSvgIcon-root {

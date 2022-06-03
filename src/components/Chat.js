@@ -162,17 +162,18 @@ function Chat({rooms, users}) {
                     </IconButton>
                 </div>
             </div>
-            <div className="chat_main">
-                {receivedMessages.map((message) =>
-                <div className='chat_body' key={message.message_id}>
-                    <div className={`chat_message ${true && 'chat_receiver'}`}> 
+            {/*<div className="chat_main">*/}
+                
+                <div className='chat_body'>
+                {messages.map((message) =>
+                    <div className={`chat_message ${message.creator == localStorage.getItem('user') && 'chat_receiver'}`} key={message.message_id}> 
                         <span className='chat_name'>{getUserName(message.creator)}</span>
                         {message.text} {message.magnet_uri? "(File Attached)" : ""}
                         <span className= 'chat_timestamp'>{message.timestamp}</span>
                     </div>
-                </div>
                 )}
-                {sentMessages.map((message)=>
+                </div>
+                {/*{sentMessages.map((message)=>
                 <div className='chat_body' key={message.message_id}>
                     <div className={`chat_message ${true && 'chat_sender'}`}> 
                         <span className='chat_name'>{getUserName(message.creator)}</span>
@@ -180,15 +181,15 @@ function Chat({rooms, users}) {
                         <span className= 'chat_timestamp'>{message.timestamp}</span>
                     </div>
                 </div>
-                )}
-            </div>
+                )}*/}
+            {/*</div>*/}
             <div className='chat_footer'>
                 <InsertEmoticon />
                 <form encType="multipart/form-data">
                     <input type="text" placeholder="Type a message" value={input} onChange={e => setInput(e.target.value) } />
                     {/* <IconButton> */}
                         {/* <SendRounded  onClick={sendMessage}/> */}
-                        <button type="submit" onClick={sendMessage} className="submit-btn">Send</button>
+                        <button type="submit" onClick={sendMessage} >Send</button>
                     {/* </IconButton> */}
                 </form>
             </div>

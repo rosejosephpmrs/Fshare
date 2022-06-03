@@ -39,6 +39,7 @@
     border: none;
     margin-left: 10px;
     background-color: #F5FFFA;
+    width: 100%;
 }
 .sidebar_searchContainer > input:focus {
     outline:none;
@@ -46,6 +47,9 @@
 .sidebar_searchContainer > .MuiSvgIcon-root {
     color: 	#5F9EA0;
     padding: 10px;
+}
+.sidebar_searchClear > .MuiSvgIcon-root {
+    color: 	#5F9EA0;
 }
 .sidebar_chats {
     flex: 1;
