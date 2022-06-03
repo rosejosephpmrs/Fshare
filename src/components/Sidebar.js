@@ -4,6 +4,7 @@ import {Avatar, IconButton} from '@mui/material'
 import MoreVertRounded from '@mui/icons-material/MoreVertRounded'
 import {SearchOutlined} from '@mui/icons-material'
 import SidebarChat from './SidebarChat';
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 function Sidebar({rooms}) {
@@ -15,6 +16,7 @@ function Sidebar({rooms}) {
       else if(room.name.toLowerCase().includes(searchTerm.toLowerCase()))
         return room
     }
+
     return (
         <div className='sidebar'>
           
@@ -32,7 +34,8 @@ function Sidebar({rooms}) {
           <div className='sidebar_search'>
               <div className='sidebar_searchContainer'>
                 <SearchOutlined />
-                <input placeholder='Search' type="text" onChange={e => {setSearchTerm(e.target.value)}}/>
+                <input placeholder='Search' type="text" value={searchTerm} onChange={e => {setSearchTerm(e.target.value)}}/>
+                <IconButton className='sidebar_searchClear' onClick={()=>setSearchTerm('')}><ClearIcon /></IconButton>
               </div>    
           </div>
           <div className='sidebar_chats'>
