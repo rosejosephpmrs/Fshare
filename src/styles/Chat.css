@@ -19,6 +19,7 @@
 .chat_headerInfo>h3 {
     margin-bottom: 3px;
     font-weight: 500;
+    margin-top: 3px;
 }
 
 .chat_headerRight {
@@ -114,4 +115,13 @@
 
 .para-chat {
     margin: auto;
+}
+.chat_fileUpload {
+    display:none;
+}
+.chat_fileIcon>.MuiSvgIcon-root{
+    margin-top:5px;
+    color: rgb(109, 109, 109);  
+    padding: 10px;
+    cursor: pointer;
 }
