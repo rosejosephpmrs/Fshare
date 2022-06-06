@@ -116,8 +116,8 @@ function Chat({rooms, users}) {
 
     const sendMessage = (e) => {
         // console.log(files)
-        console.log("filestest", files)
-        const res = addMessage(input, files, roomId, user)
+        console.log("form", e.target.text.value, e.target.file.files[0])
+        const res = addMessage(e.target.text.value, e.target.file.files[0], roomId, user)
         console.log("Response", res)
         e.preventDefault();
         // console.log(e.target.value)
@@ -139,6 +139,9 @@ function Chat({rooms, users}) {
         console.log("file", e.target.files[0])
         // addMessage(input, files, roomId, 2)
         console.log(files);
+        setInput(e.target.files[0].name)
+        // newTorrent(e.target.files[0])
+
     }
 
     return (
@@ -153,10 +156,10 @@ function Chat({rooms, users}) {
                     {/* <IconButton>
                         <UploadFileOutlinedIcon />
                     </IconButton> */}
-                    <form encType="multipart/form-data">
+                    {/* <form encType="multipart/form-data">
                         <input type="file" onChange={handleChange} name="file" />
-                        {/* <button type="submit" onClick={}>Upload</button> */}
-                    </form>
+                         <button type="submit" onClick={}>Upload</button> 
+                    </form> */}
                     <IconButton>
                         <MoreVertIcon />
                     </IconButton>
@@ -185,11 +188,15 @@ function Chat({rooms, users}) {
             {/*</div>*/}
             <div className='chat_footer'>
                 <InsertEmoticon />
-                <form encType="multipart/form-data">
-                    <input type="text" placeholder="Type a message" value={input} onChange={e => setInput(e.target.value) } />
+                <form encType="multipart/form-data" onSubmit={sendMessage}>
+                    <input type="text" placeholder="Type a message" value={input} onChange={e => setInput(e.target.value) } name='text' />
                     {/* <IconButton> */}
                         {/* <SendRounded  onClick={sendMessage}/> */}
-                        <button type="submit" onClick={sendMessage} >Send</button>
+                        <label className='chat_fileIcon' >
+                        <input type="file" onChange={handleChange} name="file" className='chat_fileUpload'/>
+                        <UploadFileOutlinedIcon />
+                        </label>
+                        <button type="submit">Send</button>
                     {/* </IconButton> */}
                 </form>
             </div>
