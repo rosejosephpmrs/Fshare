@@ -23,7 +23,7 @@ function Chat({rooms, users}) {
     const [receivedMessages, setReceivedMessages] = useState([])
     const [latestMessage, setLatestMessage] = useState({})
 
-    const messageUrl = 'http://159.65.146.44:8000/api/messages/'
+    const messageUrl = 'http://127.0.0.1:8000/api/messages/'
 
     const filterbyRoomId = (obj) => {
         if (obj.room_id == roomId){
@@ -171,7 +171,7 @@ function Chat({rooms, users}) {
                 {messages.map((message) =>
                     <div className={`chat_message ${message.creator == localStorage.getItem('user') && 'chat_receiver'}`} key={message.message_id}> 
                         <span className='chat_name'>{getUserName(message.creator)}</span>
-                        {message.text} {message.magnet_uri? "(File Attached)" : ""}
+                        {message.text} {message.magnet_uri? <UploadFileOutlinedIcon /> : ""}
                         <span className= 'chat_timestamp'>{message.timestamp}</span>
                     </div>
                 )}

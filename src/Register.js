@@ -37,7 +37,7 @@ const Register = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const [successMessage, setSuccessMessage] = useState("")
+  const [successMessage, setSuccessMessage] = useState("something")
 
   useEffect(() => {
     userRef.current.focus();
@@ -79,6 +79,7 @@ const Register = () => {
       setSuccessMessage("User added!")
       console.log(response.data.id);
       localStorage.setItem('user', response.data.id)
+      const username = response.data.username
       setSuccess(true);
       //clear state and controlled inputs
       setUserEmail("");
@@ -99,7 +100,7 @@ const Register = () => {
   return (
     <>
       {success ? (
-        <Login />
+        <Login /> 
       ) : (
         <section className="section-register">
           <p
@@ -110,9 +111,11 @@ const Register = () => {
             {errMsg}
           </p>
           
-
+          {/* <h4 style="margin-top:5%;">{successMessage}</h4> */}
+          
           <form onSubmit={handleSubmit} className="form-register">
           <h1>Register</h1>
+            
             <label htmlFor="firstname">
               First Name:
               <FontAwesomeIcon
@@ -315,7 +318,6 @@ const Register = () => {
             >
               Sign Up
             </button>
-            <p> {successMessage} </p>
             <p>
             Already registered?
             <br />

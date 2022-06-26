@@ -25,7 +25,7 @@ function ChatHome() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: response } = await axios.get('http://159.65.146.44:8000/api/chat/');
+        const { data: response } = await axios.get('http://127.0.0.1:8000/api/chat/');
         setrooms(response)
         console.log("Response", response)
       } catch (error) {
@@ -35,18 +35,26 @@ function ChatHome() {
     };
     const fetchUsers = async () => {
       try {
-        const { data: response } = await axios.get('http://159.65.146.44:8000/api/user/');
+        const { data: response } = await axios.get('http://127.0.0.1:8000/api/user/');
         setUsers(response)
         console.log("Response", response)
+        console.log(localStorage.getItem('user'))
+        console.log(users)
+        const currUserName = users.find(isCurrentUser)
+        console.log(currUserName)
+        setUser(currUserName.username)
       } catch (error) {
         console.error(error)
       }
       // setLoading(false);
     };
 
+    const isCurrentUser = (user) => user.id == localStorage.getItem('user')
+
     fetchData();
     fetchUsers();
-  }, []);
+
+  }, [rooms]);
 
   // const loadRooms = () =>{
   //   try {
@@ -76,7 +84,7 @@ function ChatHome() {
             <Sidebar rooms={rooms}/>
             <Routes>
             <Route path="/chat/:roomId" element={<Chat rooms={rooms} users={users}/>} />
-            <Route path="/" element={<p className="para-chat"> No chat selected </p>} />
+            <Route path="/" element={<p className="para-chat"> Hello, @{user}! Please select a chat...</p>} />
             <Route path="/chat/add" element={<NewChatForm userprops={users}/>} />
             </Routes>
       </div>

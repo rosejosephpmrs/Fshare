@@ -5,6 +5,7 @@ import MoreVertRounded from '@mui/icons-material/MoreVertRounded'
 import {SearchOutlined} from '@mui/icons-material'
 import SidebarChat from './SidebarChat';
 import ClearIcon from '@mui/icons-material/Clear';
+import ShareIcon from '@mui/icons-material/Share';
 
 
 function Sidebar({rooms}) {
@@ -23,7 +24,7 @@ function Sidebar({rooms}) {
           <div className='sidebar_header'>
               <div className='sidebar_header_left'>
                   <IconButton>
-                    <Avatar />
+                    <ShareIcon/>
                   </IconButton>
                   <h2 className='sidebar_appName'>FShare</h2> 
                </div>

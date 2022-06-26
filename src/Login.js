@@ -1,9 +1,12 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from './context/AuthProvider';
 import './styles/Register.css'
+import Cookies from "js-cookie"
 
 import axios from './api/axios';
-const LOGIN_URL = '/auth';
+const LOGIN_URL = 'http://127.0.0.1:8000/api-auth/login/';
+
+// axios.defaults.headers.common['X-CSRF-Token'] = Cookies.get('csrftoken');
 
 const Login = () => {
 	const { setAuth } = useContext(AuthContext);
@@ -26,14 +29,22 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		localStorage.setItem('user', 1)
 		e.preventDefault();
-
 		try {
 			const response = await axios.post(
 				LOGIN_URL,
-				JSON.stringify({ user, pwd }),
 				{
-					headers: { 'Content-Type': 'application/json' },
+					user: user,
+					pwd: pwd,
+					// csrfmiddlewaretoken: Cookies.get('csrftoken')
+				},
+				{
+					headers: { 
+						'Content-Type': 'application/json',
+						// 'Access-Control-Allow-Headers': 'X-CSRF-Token',
+						// 'X-CSRF-Token': Cookies.get('csrftoken') 
+					},
 					withCredentials: true,
+					// credentials: 'include'
 				}
 			);
 
@@ -103,8 +114,9 @@ const Login = () => {
 							<a href="/register">Sign Up</a>
 						</span>
 					</p>
+
 					</form>
-					
+
 				</section>
 			)}
 		</>

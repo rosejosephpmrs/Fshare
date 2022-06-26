@@ -12,6 +12,7 @@ function NewChatForm(userprops){
   const [participants, setParticipants] = useState([]);
   const [roomName, setRoomName] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   console.log("passed", userprops)
 
@@ -43,14 +44,16 @@ function NewChatForm(userprops){
     const newlist = participants.split(',')
     newlist.forEach(item => newParticipants.push(parseInt(item)))
     try {
-      const response = await axios.post('http://159.65.146.44:8000/api/chat/', {
+      const response = await axios.post('http://127.0.0.1:8000/api/chat/', {
         name: roomName,
         participants: newParticipants
       })
       console.log(response)
+      setErrorMessage("")
       setSuccessMessage("Chat room added!")
     } catch(err) {
       console.log(err)
+      setErrorMessage("Error. Chat Room could not be added.")
     }
   }
   
@@ -74,7 +77,8 @@ function NewChatForm(userprops){
             className=".input-line"
           />
         <input type="submit" value="Create Room" className="submit-btn"/>
-        <p>{successMessage}</p>
+        <h2>{successMessage}</h2>
+        <h2>{errorMessage}</h2>
     </form>
   )
 }
