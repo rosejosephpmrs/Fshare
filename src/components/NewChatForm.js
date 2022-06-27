@@ -47,7 +47,9 @@ function NewChatForm(userprops){
       const response = await axios.post('http://127.0.0.1:8000/api/chat/', {
         name: roomName,
         participants: newParticipants
-      })
+      }, {headers: {
+        'Authorization':`Bearer ${localStorage.getItem('token')}`
+      }})
       console.log(response)
       setErrorMessage("")
       setSuccessMessage("Chat room added!")

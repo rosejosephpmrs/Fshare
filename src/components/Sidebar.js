@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Sidebar.css';
 import {Avatar, IconButton} from '@mui/material'
 import MoreVertRounded from '@mui/icons-material/MoreVertRounded'
@@ -10,6 +10,7 @@ import ShareIcon from '@mui/icons-material/Share';
 
 function Sidebar({rooms}) {
     const [searchTerm, setSearchTerm] = useState('')
+    const [filteredRooms, setFilteredRooms] = useState([])
 
     const filterBySearch = (room) => {
       if (searchTerm == '')
@@ -17,6 +18,22 @@ function Sidebar({rooms}) {
       else if(room.name.toLowerCase().includes(searchTerm.toLowerCase()))
         return room
     }
+
+    const filterByUser = (rooms) => {
+      let filtered = []
+      for(let i=0; i<rooms.length; i++){
+        console.log("got", rooms[i])
+        if(rooms[i].participants.includes(parseInt(localStorage.getItem('user')))){
+          console.log("got")
+          filtered.push(rooms[i])
+        }
+      }
+      setFilteredRooms(filtered)
+    }
+
+    useEffect(() => {
+      filterByUser(rooms)}
+      ,[filteredRooms])
 
     return (
         <div className='sidebar'>
@@ -28,9 +45,9 @@ function Sidebar({rooms}) {
                   </IconButton>
                   <h2 className='sidebar_appName'>FShare</h2> 
                </div>
-               <IconButton>
+               {/* <IconButton>
                 <MoreVertRounded />
-               </IconButton> 
+               </IconButton>  */}
           </div>
           <div className='sidebar_search'>
               <div className='sidebar_searchContainer'>
@@ -41,7 +58,7 @@ function Sidebar({rooms}) {
           </div>
           <div className='sidebar_chats'>
                 <SidebarChat addNewChat={true} />
-                {rooms.filter(filterBySearch).map((room) => (
+                {filteredRooms.filter(filterBySearch).map((room) => (
                     <SidebarChat 
                         key={room.room_id}
                         name={room.name}

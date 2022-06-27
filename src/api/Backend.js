@@ -96,6 +96,10 @@ export async function addMessage(text, torrent_file, room_id, creator) {
                 magnet_uri,
                 room_id,
                 creator,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
             });
             console.log("form1", response)
             return response
@@ -107,6 +111,10 @@ export async function addMessage(text, torrent_file, room_id, creator) {
             magnet_uri,
             room_id,
             creator,
+        }, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         });
         return response
     }

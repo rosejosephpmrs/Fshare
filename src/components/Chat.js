@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { FileUploader } from 'react-drag-drop-files';
 import { addMessage, addTorrent, getActiveTorrents, newTorrent } from '../api/Backend';
 import axios from 'axios';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
 
 
@@ -33,7 +34,7 @@ function Chat({rooms, users}) {
     }
 
     const filterSent = (obj) => {
-        console.log("userid", localStorage.getItem('user'))
+        console.log("user", localStorage.getItem('user'))
         if(obj.creator == localStorage.getItem('user')){
             return true
         }
@@ -49,9 +50,21 @@ function Chat({rooms, users}) {
 
     const getUserName = (id) => {
         // console.log("id", id)
-        let creator = users.filter((user)=> user.id === id)
-        console.log(creator[0].username)
-        return creator[0].username
+        // let creator = users.find((item) => item.id === localStorage.getItem('user'))
+        let creator = ''
+        console.log("id1", id)
+        for(let i=0; i<users.length; i++){
+            // console.log("decoded1", users)
+            if(users[i].id==id){
+                creator = users[i].username
+                console.log("id2", users[i].id)
+                console.log("id3", creator)
+                return creator
+                // console.log("decoded" , creator)
+            }
+        }
+       
+        return creator
     }
 
     const checkSeeded = () => {
@@ -77,7 +90,9 @@ function Chat({rooms, users}) {
 
     const fetchData = async () => {
             try {
-                const { data: response } = await axios.get(messageUrl);
+                const { data: response } = await axios.get(messageUrl, {headers: {
+                    'Authorization':`Bearer ${localStorage.getItem('token')}`
+                  }});
                 // setrooms(response)
                 // console.log("Messages", response)
                 let filtered_messages = response.filter(filterbyRoomId)
@@ -160,9 +175,9 @@ function Chat({rooms, users}) {
                         <input type="file" onChange={handleChange} name="file" />
                          <button type="submit" onClick={}>Upload</button> 
                     </form> */}
-                    <IconButton>
+                    {/* <IconButton>
                         <MoreVertIcon />
-                    </IconButton>
+                    </IconButton> */}
                 </div>
             </div>
             {/*<div className="chat_main">*/}
@@ -171,7 +186,7 @@ function Chat({rooms, users}) {
                 {messages.map((message) =>
                     <div className={`chat_message ${message.creator == localStorage.getItem('user') && 'chat_receiver'}`} key={message.message_id}> 
                         <span className='chat_name'>{getUserName(message.creator)}</span>
-                        {message.text} {message.magnet_uri? <UploadFileOutlinedIcon /> : ""}
+                        {message.text} {message.magnet_uri? <InsertDriveFileIcon /> : ""}
                         <span className= 'chat_timestamp'>{message.timestamp}</span>
                     </div>
                 )}

@@ -120,12 +120,12 @@ const Register = () => {
               First Name:
               <FontAwesomeIcon
                 icon={faCheck}
-                className={validName ? "valid" : "hide"}
+                className={firstName ? "valid" : "hide"}
               />
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 icon={faTimes}
-                className={validName || !user ? "hide" : "invalid"}
-              />
+                className={firstName ? "hide" : "invalid"}
+              /> */}
             </label>
             <input
               type="text"
@@ -140,23 +140,23 @@ const Register = () => {
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
             />
-            <p
+            {/* <p
               id="uidnote"
               className={
                 userFocus && user && !validName ? "instructions" : "offscreen"
               }
             >
-            </p>
+            </p> */}
             <label htmlFor="lastname">
               Last Name:
               <FontAwesomeIcon
                 icon={faCheck}
-                className={validName ? "valid" : "hide"}
+                className={lastName ? "valid" : "hide"}
               />
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 icon={faTimes}
-                className={validName || !user ? "hide" : "invalid"}
-              />
+                className={!lastName ? "hide" : "invalid"}
+              /> */}
             </label>
             <input
               type="text"
@@ -166,28 +166,28 @@ const Register = () => {
               onChange={(e) => setLastName(e.target.value)}
               value={lastName}
               required
-              aria-invalid={validName ? "false" : "true"}
-              aria-describedby="uidnote"
+              // aria-invalid={validName ? "false" : "true"}
+              // aria-describedby="uidnote"
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
             />
-            <p
-              id="uidnote"
+            {/* <p
+              // id="uidnote"
               className={
                 userFocus && user && !validName ? "instructions" : "offscreen"
               }
             >
-            </p>
+            </p> */}
             <label htmlFor="lastname">
               Username:
               <FontAwesomeIcon
                 icon={faCheck}
-                className={validName ? "valid" : "hide"}
+                className={user ? "valid" : "hide"}
               />
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 icon={faTimes}
-                className={validName || !user ? "hide" : "invalid"}
-              />
+                className={user ? "hide" : "invalid"}
+              /> */}
             </label>
             <input
               type="text"
@@ -202,13 +202,13 @@ const Register = () => {
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
             />
-            <p
+            {/* <p
               id="uidnote"
               className={
                 userFocus && user && !validName ? "instructions" : "offscreen"
               }
             >
-            </p>
+            </p> */}
             <label htmlFor="email">
               Email:
               <FontAwesomeIcon
@@ -217,7 +217,7 @@ const Register = () => {
               />
               <FontAwesomeIcon
                 icon={faTimes}
-                className={validName || !user ? "hide" : "invalid"}
+                className={validName || !email ? "hide" : "invalid"}
               />
             </label>
             <input
@@ -233,13 +233,13 @@ const Register = () => {
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
             />
-            <p
+            {/* <p
               id="uidnote"
               className={
                 userFocus && user && !validName ? "instructions" : "offscreen"
               }
             >
-            </p>
+            </p> */}
 
             <label htmlFor="password">
               Password:
@@ -314,7 +314,7 @@ const Register = () => {
             </p>
 
             <button
-              disabled={!validName || !validPwd || !validMatch ? true : false}
+              disabled={!firstName || !lastName || !user || !validName || !validPwd || !validMatch ? true : false}
             >
               Sign Up
             </button>

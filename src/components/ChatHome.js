@@ -9,6 +9,7 @@ import { getChatRooms } from '../api/Backend';
 import axios from 'axios';
 import NewChatForm from './NewChatForm';
 import '../styles/Chat.css'
+import {Link} from 'react-router-dom'
 
 function ChatHome() {
   //const [loading, setloading] = useState(false); 
@@ -16,20 +17,28 @@ function ChatHome() {
   //const [refresh, setrefresh] = useState(false); 
   const [rooms, setrooms] =useState([])
 
-  const [user, setUser] = useState('name');
+  const [user, setUser] = useState(localStorage.getItem('user'));
 
   const [users, setUsers] = useState([])
+  const [statusCode, setStatusCode] = useState(null)
   
   // useEffect(()=>{loadRooms()},[])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: response } = await axios.get('http://127.0.0.1:8000/api/chat/');
-        setrooms(response)
+        const response  = await axios.get('http://127.0.0.1:8000/api/chat/', {headers: {
+          'Authorization':`Bearer ${localStorage.getItem('token')}`
+        }});
+        setrooms(response.data)
         console.log("Response", response)
+        console.log("data", response.status)
+
       } catch (error) {
         console.error(error)
+        setStatusCode(error.response.status)
+        console.log(error.response.status)
+        console.log("Status", statusCode)
       }
       // setLoading(false);
     };
@@ -66,12 +75,13 @@ function ChatHome() {
   //   }
   // }
 
-  if (rooms.length === 0) {
+  if (statusCode === 401) {
     return (
       <div className='sidebar' >
         <p>
-          Sorry No Rooms Available.. 
+          You have not logged in or your session has expired..Please <Link to="/login">login</Link> again 
         </p>
+        
       </div>
     );
   }

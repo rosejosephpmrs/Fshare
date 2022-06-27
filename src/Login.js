@@ -4,7 +4,9 @@ import './styles/Register.css'
 import Cookies from "js-cookie"
 
 import axios from './api/axios';
-const LOGIN_URL = 'http://127.0.0.1:8000/api-auth/login/';
+import ChatHome from './components/ChatHome';
+import jwt_decode from "jwt-decode";
+const LOGIN_URL = 'http://127.0.0.1:8000/api/token/';
 
 // axios.defaults.headers.common['X-CSRF-Token'] = Cookies.get('csrftoken');
 
@@ -27,14 +29,14 @@ const Login = () => {
 	}, [user, pwd]);
 
 	const handleSubmit = async (e) => {
-		localStorage.setItem('user', 1)
+		// localStorage.setItem('user', 1)
 		e.preventDefault();
 		try {
 			const response = await axios.post(
 				LOGIN_URL,
 				{
-					user: user,
-					pwd: pwd,
+					username: user,
+					password: pwd,
 					// csrfmiddlewaretoken: Cookies.get('csrftoken')
 				},
 				{
@@ -54,6 +56,11 @@ const Login = () => {
 			setUser('');
 			setPwd('');
 			setSuccess(true);
+			localStorage.setItem('token', response.data.access)
+			const decoded = jwt_decode(localStorage.getItem('token'))
+			console.log("decoded", decoded)
+			localStorage.setItem('user', decoded.user_id)
+
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg('No Server Response');
@@ -71,11 +78,7 @@ const Login = () => {
 	return (
 		<>
 			{success ? (
-				<section>
-					<h1>You are logged in!</h1>
-					<br />
-					<p>{/* <a href="#">Go to Home</a> */}</p>
-				</section>
+				<ChatHome />
 			) : (
 				<section className="section-register">
 					<p
