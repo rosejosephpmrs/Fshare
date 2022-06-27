@@ -43,6 +43,9 @@ function NewChatForm(userprops){
     setSuccessMessage("")
     const newlist = participants.split(',')
     newlist.forEach(item => newParticipants.push(parseInt(item)))
+    if(!newParticipants.includes(parseInt(localStorage.getItem('user')))){
+      newParticipants.push(parseInt(localStorage.getItem('user')))
+    }
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/chat/', {
         name: roomName,

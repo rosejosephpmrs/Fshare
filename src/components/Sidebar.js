@@ -6,6 +6,8 @@ import {SearchOutlined} from '@mui/icons-material'
 import SidebarChat from './SidebarChat';
 import ClearIcon from '@mui/icons-material/Clear';
 import ShareIcon from '@mui/icons-material/Share';
+import LogoutIcon from '@mui/icons-material/Logout';
+import {Link} from "react-router-dom"
 
 
 function Sidebar({rooms}) {
@@ -45,9 +47,11 @@ function Sidebar({rooms}) {
                   </IconButton>
                   <h2 className='sidebar_appName'>FShare</h2> 
                </div>
-               {/* <IconButton>
-                <MoreVertRounded />
-               </IconButton>  */}
+               <Link to="/logout">
+                <IconButton>
+                  <LogoutIcon />
+                </IconButton> 
+               </Link>
           </div>
           <div className='sidebar_search'>
               <div className='sidebar_searchContainer'>

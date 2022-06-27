@@ -5,7 +5,7 @@ import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import '../styles/Chat.css'
 import { InsertEmoticon } from '@mui/icons-material';
 import { SendRounded } from '@mui/icons-material';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { FileUploader } from 'react-drag-drop-files';
 import { addMessage, addTorrent, getActiveTorrents, newTorrent } from '../api/Backend';
 import axios from 'axios';
@@ -24,7 +24,14 @@ function Chat({rooms, users}) {
     const [receivedMessages, setReceivedMessages] = useState([])
     const [latestMessage, setLatestMessage] = useState({})
 
-    const messageUrl = 'http://127.0.0.1:8000/api/messages/'
+    
+    const location = useLocation();
+    const currentPath = location.pathname;
+    console.log("curr", currentPath)
+    let chatId = currentPath.split("/")[2]
+    console.log("curr", chatId)
+
+    let messageUrl = `http://127.0.0.1:8000/api/messages/?cid=${chatId}`
 
     const filterbyRoomId = (obj) => {
         if (obj.room_id == roomId){
@@ -90,6 +97,7 @@ function Chat({rooms, users}) {
 
     const fetchData = async () => {
             try {
+                
                 const { data: response } = await axios.get(messageUrl, {headers: {
                     'Authorization':`Bearer ${localStorage.getItem('token')}`
                   }});
