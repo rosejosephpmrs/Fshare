@@ -10,6 +10,7 @@ import { FileUploader } from 'react-drag-drop-files';
 import { addMessage, addTorrent, getActiveTorrents, newTorrent } from '../api/Backend';
 import axios from 'axios';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import CreateIcon from '@mui/icons-material/Create';
 
 
 
@@ -210,7 +211,8 @@ function Chat({rooms, users}) {
                 )}*/}
             {/*</div>*/}
             <div className='chat_footer'>
-                <InsertEmoticon />
+                {/* <InsertEmoticon /> */}
+                <CreateIcon />
                 <form encType="multipart/form-data" onSubmit={sendMessage}>
                     <input type="text" placeholder="Type a message" value={input} onChange={e => setInput(e.target.value) } name='text' />
                     {/* <IconButton> */}
