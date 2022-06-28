@@ -2,7 +2,7 @@ const axios = require("axios").default;
 const WebTorrent = require("webtorrent/webtorrent.min.js");
 
 const axiosClient = axios.create({
-    baseURL: "http://127.0.0.1:8000/api",
+    baseURL: "http://139.59.50.131:8000/api",
 });
 
 const torrentClient = new WebTorrent();

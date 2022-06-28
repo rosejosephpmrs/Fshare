@@ -32,7 +32,7 @@ function Chat({rooms, users}) {
     let chatId = currentPath.split("/")[2]
     console.log("curr", chatId)
 
-    let messageUrl = `http://127.0.0.1:8000/api/messages/?cid=${chatId}`
+    let messageUrl = `http://139.59.50.131:8000/api/messages/?cid=${chatId}`
 
     const filterbyRoomId = (obj) => {
         if (obj.room_id == roomId){

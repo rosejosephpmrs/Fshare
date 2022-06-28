@@ -6,7 +6,7 @@ import Cookies from "js-cookie"
 import axios from './api/axios';
 import ChatHome from './components/ChatHome';
 import jwt_decode from "jwt-decode";
-const LOGIN_URL = 'http://127.0.0.1:8000/api/token/';
+const LOGIN_URL = 'http://139.59.50.131:8000/api/token/';
 
 // axios.defaults.headers.common['X-CSRF-Token'] = Cookies.get('csrftoken');
 

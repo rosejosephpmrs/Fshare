@@ -47,7 +47,7 @@ function NewChatForm(userprops){
       newParticipants.push(parseInt(localStorage.getItem('user')))
     }
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/chat/', {
+      const response = await axios.post('http://139.59.50.131:8000/api/chat/', {
         name: roomName,
         participants: newParticipants
       }, {headers: {

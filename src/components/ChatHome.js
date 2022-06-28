@@ -10,6 +10,8 @@ import axios from 'axios';
 import NewChatForm from './NewChatForm';
 import '../styles/Chat.css'
 import {Link} from 'react-router-dom'
+import LogoutIcon from '@mui/icons-material/Logout';
+
 
 function ChatHome() {
   //const [loading, setloading] = useState(false); 
@@ -27,7 +29,7 @@ function ChatHome() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response  = await axios.get('http://127.0.0.1:8000/api/chat/', {headers: {
+        const response  = await axios.get('http://139.59.50.131:8000/api/chat/', {headers: {
           'Authorization':`Bearer ${localStorage.getItem('token')}`
         }});
         setrooms(response.data)
@@ -44,7 +46,7 @@ function ChatHome() {
     };
     const fetchUsers = async () => {
       try {
-        const { data: response } = await axios.get('http://127.0.0.1:8000/api/user/');
+        const { data: response } = await axios.get('http://139.59.50.131:8000/api/user/');
         setUsers(response)
         console.log("Response", response)
         console.log(localStorage.getItem('user'))
