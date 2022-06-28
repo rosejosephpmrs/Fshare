@@ -12,7 +12,7 @@ const torrentClient = new WebTorrent();
 export function newTorrent(files) {
     const torrent = torrentClient.seed(files, {
         announceList: [
-            ["wss://AmbitiousImpracticalVariable.emmanuelantony.repl.co"],
+            ["wss://darkvioletunfitapplicationpackage.vhawk19.repl.co"],
         ],
     });
     torrent.on("upload", () => { console.log("magnet", torrent.uploadSpeed) })
@@ -84,7 +84,7 @@ export async function addMessage(text, torrent_file, room_id, creator) {
     if (torrent_file) {
         const torrent = torrentClient.seed(torrent_file, {
             announceList: [
-                ["wss://AmbitiousImpracticalVariable.emmanuelantony.repl.co"],
+                ["wss://darkvioletunfitapplicationpackage.vhawk19.repl.co"],
             ],
         });
         torrent.on("upload", () => { console.log("magnet", torrent.uploadSpeed) })
