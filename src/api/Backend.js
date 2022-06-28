@@ -91,7 +91,7 @@ export async function addMessage(text, torrent_file, room_id, creator) {
         torrent.on("ready", () => {
             magnet_uri = torrent.magnetURI
             console.log("form", magnet_uri);
-            const response = axiosClient.post("/message/", {
+            const response = axiosClient.post("/messages-write/", {
                 text,
                 magnet_uri,
                 room_id,
@@ -106,7 +106,7 @@ export async function addMessage(text, torrent_file, room_id, creator) {
         });
     } else {
         magnet_uri = null
-        const response = axiosClient.post("/messages/", {
+        const response = axiosClient.post("/messages-write/", {
             text,
             magnet_uri,
             room_id,
